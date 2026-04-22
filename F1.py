@@ -323,12 +323,14 @@ else:
                 st.error(f"Analysis request failed: {exc}")
     
 
-    st.download_button(
-        label="Download Analysis as Text File",
-        data=analysis_result,
-        file_name=f"{selected_season}_{selected_race}_{selected_session}_analysis.txt",
-        mime="text/plain",
-    )
+download_enabled = bool(analysis_result)
+st.download_button(
+    label="Download Analysis as Text File",
+    data=analysis_result or "No AI analysis generated yet.",
+    file_name=f"{selected_season}_{selected_race}_{selected_session}_analysis.txt",
+    mime="text/plain",
+    disabled=not download_enabled,
+)
 
 
 
